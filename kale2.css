@@ -1,0 +1,120 @@
+BODY {
+  font-family: Times New Roman;
+  font-size: 9pt;
+  background: #cedddd;
+  color: black;
+}
+
+P {
+  font-family: Times New Roman;
+  font-size: 9pt;
+  color: black;
+}
+
+.PP {
+  font-family: Verdana, Arial, Helvetica;
+  font-size: 9pt;
+  color: black;
+}
+
+.Cim {
+  font-family: Times New Roman;
+  text-align: center;
+  font-size: 15pt;
+  font-weight: bold;
+  color: #990000;
+}
+
+.Alcim {
+  font-family: Times New Roman;
+  text-align: center;
+  font-size: 12pt;
+  font-style: italic;
+  font-weight: bold;
+  color: #990000;
+}
+
+.New {
+  font-family: Arial;
+  font-size: 18pt;
+  font-weight: bold;
+  color: #ff0000;
+  text-decoration: blink;
+}
+
+#Table1 {
+  background: #887d88;
+  font-size: 9pt;
+  font-weight: bold;
+  align: center;
+  text-align: center;
+  color: #ffffff;
+}
+
+.tbcim {
+  font-family: Times New Roman;
+  color: #ffffff;
+  font-size: 14pt;
+  text-align: center;
+  font-weight: bold;
+}
+
+.tbfocim {
+  font-family: Times New Roman, Times;
+  color: #ffffff;
+  font-size: 14pt;
+  font-weight: bold;
+  text-align: center;
+  background: #998888;
+}
+
+.cella {
+  font-family: Times New Roman;
+  font-size: 10pt;
+  text-align: center;
+  background: #fffaf0;
+}
+
+.focim {
+  font-family: Arial, Helvetica;
+  font-size: 12pt;
+  line-height: 12pt;
+  margin-bottom: -10px;
+  top-margin: 5pt;
+  color: #330099;
+  font-weight: bold;
+  text-align: center;
+}
+
+.instr1 {
+  font-family: Times New Roman, Times;
+  color: #ffffff;
+  font-size: 9pt;
+  font-weight: bold;
+  text-align: center;
+  background: #998888;
+}
+
+.instr2 {
+  font-family: Times New Roman;
+  font-size: 9pt;
+  text-align: center;
+  background: #e9e0d6;
+}
+
+.cella2 {
+  font-family: "Times New Roman";
+  font-size: 11pt;
+  text-align: left;
+  background: #fffaf0;
+  padding-left: 3px;
+}
+
+.tbfocimright {
+  font-family: "Times New Roman", Times;
+  color: #ffffff;
+  font-size: 14pt;
+  font-weight: bold;
+  text-align: right;
+  background: #998888;
+}

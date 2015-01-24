@@ -1,0 +1,1195 @@
+<html>
+
+<head>
+    <title>Magyar igeragozó</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script language="JavaScript" src="kuszgyak.js"></script>
+    <!--script LANGUAGE = "JavaScript" src="forras/funkcik.js">
+
+    </script-->
+
+    <script language="JavaScript">
+    <!--
+
+    var ny = "en"
+    var ir = 0
+
+    function nyelv(n) {
+        ny = n
+        parent.szavak.location.href = 'kuszi' + ny + '.htm'
+        return ny
+    }
+
+    function szavak(sz) {
+        parent.szavak.location.href = 'kuszi' + ny + '.htm#' + sz;
+        sz1 = sz;
+        return sz1
+    }
+
+    function uzen(ny) {
+        parent.uzen.location.href = 'kuszuzen.htm#f' + ny
+    }
+
+    function ragoz(ra) {
+        document.lap.ige.value = ra
+    }
+
+    function uj() {
+        ir = 1
+        beiras()
+        gvalt()
+    }
+
+    function gvalt() {
+        document.gyak.fogomb.value = "  R A G O Z  ";
+        ir = 0
+        for (szm = 1; szm < 14; szm++) {
+            if (forma[szm] == "") document.gyak[('ige' + szm)].value = " --- ";
+        }
+    }
+
+    function beiras() {
+        if (ir == 0) {
+            document.gyak.fogomb.value = "  T Ö R Ö L  ";
+            ir = 1;
+            for (szm = 1; szm < 14; szm++) {
+                (forma[szm] != "") ? document.gyak[('ige' + szm)].value = " " + forma[szm] + " ": document.gyak[('ige' + szm)].value = " --- ";
+            }
+        } else {
+            document.gyak.fogomb.value = "  R A G O Z  ";
+            ir = 0;
+            for (szm = 1; szm < 14; szm++) {
+                document.gyak[('ige' + szm)].value = ""
+            }
+        }
+    }
+
+    function kiskontrol(gomb) {
+        document.gyak[('ige' + gomb)].value = trim(document.gyak[('ige' + gomb)].value);
+        if ((document.gyak[('ige' + gomb)].value != " " + forma1[gomb] + " ") && (document.gyak[('ige' + gomb)].value != " " + forma2[gomb] + " ")) {
+            if (forma[gomb] == "") {
+                alert("Ez a forma nem létezik, vagy ebben a jelentésben nem vagy csak ritkán használjuk.")
+                document.gyak[('ige' + gomb)].value = " --- ";
+            } else { /*document.gyak[('ige' +gomb)].value="";*/
+                document.gyak[('ige' + gomb)].focus();
+                alert("Sajnos, hibás volt a megoldása. Javítsa ki!");
+            }
+        } else {
+            alert("Igen, ez a helyes igealak.");
+            gomb = gomb + 1;
+            //document.gyak[('ige' +gomb)].focus();
+        }
+    }
+
+    function kontrol() {
+        h = 0
+        for (szm = 1; szm < 14; szm++) {
+            if (forma[szm] == "") {
+                forma1[szm] = "---";
+                forma2[szm] = "---";
+            }
+            document.gyak[('ige' + szm)].value = trim(document.gyak[('ige' + szm)].value);
+            if ((document.gyak[('ige' + szm)].value != " " + forma1[szm] + " ") && (document.gyak[('ige' + szm)].value != " " + forma2[szm] + " ")) {
+                document.gyak[('ige' + szm)].value = "";
+                h = h + 1;
+            }
+            if (forma[szm] == "") document.gyak[('ige' + szm)].value = " --- "
+        }
+        (h == 0) ? alert("Remek! Minden igealak helyes."): alert("Sajnos " + h + " " + "megoldása hibás volt. Javítsa ki (őket)!");
+        h = 0
+    }
+
+    function trim(sp) {
+        sp = " " + sp + " "
+        kif = /  /g
+        while (sp.match(kif))
+            sp = sp.replace(kif, ' ')
+        return sp
+    }
+
+    //-->
+    </script>
+    <link rel="stylesheet" href="kale2.css">
+</head>
+<body bgcolor="#009999" onLoad="szavak('eleje')" /*document.lap.ige.focus()"*/>
+<form name=lap method="post" action="">
+  <div align="center"><span class="Alcim">Ragozandó ige: <font size=3>
+    <input type="text" name="ige" onBlur="mehet()" onFocus="uj()"></font></span>
+    <input type="hidden" name="kod">
+    <input type="hidden" name="gomb" value="Button" onClick="mehet();document.lap.ige.focus()">
+    <input type="hidden" name="kiir">
+    <!--input type="text" name="ido" size="4" value="1">
+  <input type="text" name="tr" size="4" value="1">
+  <input type="text" name="szem" size="4" value="1"--> 
+    <input type="hidden" name="ido" size="4" value="1">
+    <input type="hidden" name="tr" size="4" value="1">
+    <input type="hidden" name="szem" size="4" value="1">
+    <input type="hidden" name="alak">
+    <input type="hidden" name="alak1">
+    <input type="hidden" name="alak2">
+    <br>
+   <span class="Alcim">Jelen idő:
+        <input type="radio" name="idom" value="1" checked onClick="valt(1); gvalt()">
+    &nbsp; &nbsp; &nbsp;  Múlt idő:   <input type="radio" name="idom" value="2" onClick="valt(2); gvalt()">
+    &nbsp; &nbsp; &nbsp; Feltételes mód:   <input type="radio" name="idom" value="3" onClick="valt(3); gvalt()">
+    &nbsp; &nbsp; &nbsp;  Felszólító mód:
+    <input type="radio" name="idom" value="4" onClick="valt(4); gvalt()">
+    &nbsp; &nbsp; &nbsp;  <!--a href="#" onClick='nyelv("en");uzen("en")' ><img src="flaguk.gif" width="35" height="24" align=top border="0" alt="Igék angolul"></a> 
+    <a href="#" onClick=nyelv("fr")><img src="flagfr.gif" width="35" height="25" align="top" border="0" alt="Igék franciául"></a> 
+    <a href="#" onClick=nyelv("de")><img src="flagde.gif" width="35" height="25" align="top" border="0" alt="Igék németül"></a> 
+    <a href="#" onClick='nyelv("es");uzen("es")'> 
+          <img src="flagsp.gif" width="35" height="25" align="top" border="0" alt="Szavak spanyolul"></a> <a href="#" onClick=nyelv("it")><img src="flagit.gif" width="35" height="25" align="top" border="0" alt="Igék olaszul"></a-->  </span>
+  </div>
+</form>
+<form name=gyak>
+  <table width="750" border="0" cellspacing="0" cellpadding="0" align="center">
+    <tr>
+      <td width="15%">&nbsp;</td>
+      <td width="15%" class="tbfocim">Igelista</td>
+      <td width="8%">&nbsp;</td>
+      <td width="3%">&nbsp;</td>
+      <td width="21%" class="tbfocim">Alanyi ragozás</td>
+      <td width="7%">&nbsp;</td>
+      <td width="7%">&nbsp;</td>
+      <td width="3%">&nbsp;</td>
+      <td width="25%" class="tbfocim">Tárgyas ragozás</td>
+      <td width="11%">&nbsp;</td>
+      <td width="11%">&nbsp;</td>
+    </tr>
+    <tr>
+      <td rowspan="7" width="15%">&nbsp;&nbsp;</td>
+      <td rowspan="7" width="15%"><font face="default"> &nbsp; &nbsp; 
+        <select name="lista" onChange="szavak(document.gyak.lista[selectedIndex].value); ragoz(document.gyak.lista[selectedIndex].text); mehet(); gvalt()" size="10">
+          <!--option value='' selected></option-->
+<option value="a">ábrázol</option>
+<option value="ad">ad</option>
+<option value="ado">adózik</option>
+<option value="adoz">adóztat</option>
+<option value="ag">aggódik</option>
+<option value="agy">ágyaz</option>
+<option value="aj">ajándékoz</option>
+<option value="aja">ajánl</option>
+<option value="aju">ájul</option>
+<option value="ak">akadályoz</option>
+<option value="aka">akar</option>
+<option value="adas">akaszt</option>
+<option value="al">alakít</option>
+<option value="ala">alakul</option>
+<option value="alap">alapít</option>
+<option value="alk">alkalmaz</option>
+<option value="alka">alkalmazkodik</option>
+<option value="alko">alkonyodik</option>
+<option value="alkot">alkot</option>
+<option value="alku">alkudozik</option>
+<option value="all">áll</option>
+<option value="alli">állít</option>
+<option value="alm">álmodik</option>
+<option value="als">alszik</option>
+<option value="ap">ápol</option>
+<option value="ar">aránylik</option>
+<option value="ara">arat</option>
+<option value="art">árt</option>
+<option value="aru">árusít</option>
+<option value="as">ás</option>
+<option value="asi">ásít</option>
+<option value="at">atletizál</option>
+<option value="au">automatizál</option>
+<option value="aut">autózik</option>
+<option value="az">ázik</option>
+<option value="b">bán</option>
+<option value="ba">bánt</option>
+<option value="bar">barátkozik</option>
+<option value="bark">barkácsol</option>
+<option value="be">becsül</option>
+<option value="bef">befejez</option>
+<option value="befe">befejeződik</option>
+<option value="ber">bérel</option>
+<option value="bes">beszél</option>
+<option value="besz">beszélget</option>
+<option value="bet">betűz</option>
+<option value="bi">biciklizik</option>
+<option value="bir">bír</option>
+<option value="bira">bírál</option>
+<option value="birk">birkózik</option>
+<option value="biz">bíz</option>
+<option value="bizi">bízik</option>
+<option value="bizo">bizonyít</option>
+<option value="bizt">biztat</option>
+<option value="bizto">biztosít</option>
+<option value="bo">bocsát</option>
+<option value="bok">bókol</option>
+<option value="boks">bokszol</option>
+<option value="bol">boldogít</option>
+<option value="bom">bombáz</option>
+<option value="boml">bomlik</option>
+<option value="bon">bont</option>
+<option value="bor">borít</option>
+<option value="boro">borotvál</option>
+<option value="borot">borotválkozik</option>
+<option value="boru">borul</option>
+<option value="bov">bővít</option>
+<option value="bovu">bővül</option>
+<option value="bu">búcsúzik</option>
+<option value="buj">bújik</option>
+<option value="buk">bukik</option>
+<option value="buz">buzdít</option>
+<option value="bun">büntet</option>
+<option value="c">cáfol</option>
+<option value="ci">cigarettázik</option>
+<option value="cim">címez</option>
+<option value="cs">csal</option>
+<option value="cse" >cseng</option>
+<option value="csen">csenget</option>
+<option value="cser">cserél</option>
+<option value="csi">csinál</option>
+<option value="csip">csíp</option>
+<option value="cso">csodál</option>
+<option value="csod">csodálkozik</option>
+<option value="csok">csókol</option>
+<option value="csoko">csókolózik</option>
+<option value="csom">csomagol</option>
+<option value="csop">csoportosít</option>
+<option value="csokk">csökken</option>
+<option value="csokke">csökkent</option>
+<option value="cson">csöng</option>
+<option value="csong">csönget</option>
+<option value="csu">csúfol</option>
+<option value="csuk">csuk</option>
+<option value="csukl">csuklik</option>
+<option value="csusz">csúszik</option>
+<option value="d">dadog</option>
+<option value="da">dalol</option>
+<option value="dar">darabol</option>
+<option value="dara">darál</option>
+<option value="de">dedikál</option>
+<option value="dek">dekorál</option>
+<option value="del">delegál</option>
+<option value="di">dicsekszik</option>
+<option value="dic">dicsér</option>
+<option value="did">didereg</option>
+<option value="die">diétázik</option>
+<option value="dij">díjaz</option>
+<option value="dik">diktál</option>
+<option value="dis">díszít</option>
+<option value="do">dob</option>
+<option value="dob">dobol</option>
+<option value="doh">dohányzik</option>
+<option value="dok">doktorál</option>
+<option value="dol">dolgozik</option>
+<option value="dop">doppingol</option>
+<option value="dor">dorombol</option>
+<option value="dof">döf</option>
+<option value="dog">döglik</option>
+<option value="dol">dől</option>
+<option value="don">dönt</option>
+<option value="doro">dörög</option>
+<option value="dors">dörzsöl</option>
+<option value="dr">drágul</option>
+<option value="dru">drukkol</option>
+<option value="du">dudál</option>
+<option value="dud">dúdol</option>
+<option value="dug">dug</option>
+<option value="dup">dupláz</option>
+<option value="dul">dülöngél</option>
+<option value="e">ebédel</option>
+<option value="eb">ébred</option>
+<option value="ebr">ébreszt</option>
+<option value="ed">édesít</option>
+<option value="edz">edz</option>
+<option value="eg">ég</option>
+<option value="ege">éget</option>
+<option value="egy">egyenlít</option>
+<option value="egye">egyensúlyoz</option>
+<option value="egyes">egyesít</option>
+<option value="egyesu">egyesül</option>
+<option value="egyez">egyezik</option>
+<option value="egys">egységesít</option>
+<option value="egysz">egyszerűsít</option>
+<option value="egysze">egyszerűsödik</option>
+<option value="eh">éhezik</option>
+<option value="ej">ejt</option>
+<option value="el">él</option>
+<option value="ele">elemez</option>
+<option value="elen">élénkít</option>
+<option value="elenk">élénkül</option>
+<option value="eles">élesedik</option>
+<option value="elesi">élesít</option>
+<option value="elk">elkoboz</option>
+<option value="ell">ellenez</option>
+<option value="elle">ellenkezik</option>
+<option value="ellen">ellenőriz</option>
+<option value="eln">elnököl</option>
+<option value="elo">előlegez</option>
+<option value="eloz">előz</option>
+<option value="elv">élvez</option>
+<option value="em">emel</option>
+<option value="eme">emelkedik</option>
+<option value="emes">emészt</option>
+<option value="emi">emigrál</option>
+<option value="eml">emlékszik</option>
+<option value="emli">említ</option>
+<option value="en">énekel</option>
+<option value="eng">enged</option>
+<option value="enge">engedelmeskedik</option>
+<option value="enged">engedélyez</option>
+<option value="eny">enyhít</option>
+<option value="enyh">enyhül</option>
+<option value="ep">épít</option>
+<option value="epi">építkezik</option>
+<option value="epu">épül</option>
+<option value="er">ér</option>
+<option value="erd">érdekel</option>
+<option value="erde">érdeklődik</option>
+<option value="erdem">érdemel</option>
+<option value="ere">érettségizik</option>
+<option value="erez">érez</option>
+<option value="eri">érik</option>
+<option value="erin">érint</option>
+<option value="erint">érintkezik</option>
+<option value="erk">érkezik</option>
+<option value="ero">erősít</option>
+<option value="eros">erősödik</option>
+<option value="erosz">erőszakol</option>
+<option value="ert">ért</option>
+<option value="erte">értékel</option>
+<option value="ertek">értékesít</option>
+<option value="ertes">értesít</option>
+<option value="erv">érvel</option>
+<option value="erve">érvényesít</option>
+<option value="erven">érvényesül</option>
+<option value="erveny">érvénytelenít</option>
+<option value="erz">érzéstelenít</option>
+<option value="es">esik</option>
+<option value="esk">esküszik</option>
+<option value="est">esteledik</option>
+<option value="esz">eszik</option>
+<option value="et">etet</option>
+<option value="ev">evez</option>
+<option value="ex">exportál</option>
+<option value="f">fagy</option>
+<option value="fa">fagyaszt</option>
+<option value="faj">fáj</option>
+<option value="far">fárad</option>
+<option value="fara">fáraszt</option>
+<option value="faz">fázik</option>
+<option value="fe">fed</option>
+<option value="fej">fejleszt</option>
+<option value="fejl">fejlődik</option>
+<option value="fejt">fejt</option>
+<option value="fek">fékez</option>
+<option value="feks">fekszik</option>
+<option value="fekt">fektet</option>
+<option value="fel">fél</option>
+<option value="fele">felejt</option>
+<option value="felel">felel</option>
+<option value="felt">félt</option>
+<option value="felte">féltékenykedik</option>
+<option value="felv">felvételizik</option>
+<option value="fen">fenyeget</option>
+<option value="feny">fényképez</option>
+<option value="fer">fér</option>
+<option value="fert">fertőtlenít</option>
+<option value="ferto">fertőz</option>
+<option value="fertoz">fertőződik</option>
+<option value="fes">fest</option>
+<option value="fesu">fésül</option>
+<option value="fesul">fésülködik</option>
+<option value="fi">figyel</option>
+<option value="fig">figyelmeztet</option>
+<option value="fiz">fizet</option>
+<option value="fog">fog</option>
+<option value="foga">fogad</option>
+<option value="fogal">fogalmaz</option>
+<option value="fogl">foglal</option>
+<option value="fogla">foglalkozik</option>
+<option value="foglal">foglalkoztat</option>
+<option value="fogy">fogy</option>
+<option value="fogya">fogyaszt</option>
+<option value="fogyo">fogyókúrázik</option>
+<option value="foj">fojt</option>
+<option value="fol">folyik</option>
+<option value="foly">folytat</option>
+<option value="folyt">folytatódik</option>
+<option value="for">fordít</option>
+<option value="ford">fordul</option>
+<option value="forg">forgat</option>
+<option value="foro">forog</option>
+<option value="forr">forr</option>
+<option value="forra">forral</option>
+<option value="fo">fő</option>
+<option value="foz">főz</option>
+<option value="fr">frissít</option>
+<option value="fu">fúj</option>
+<option value="ful">fullad</option>
+<option value="fur">fúr</option>
+<option value="fut">fut</option>
+<option value="futb">futballozik</option>
+<option value="fug">függ</option>
+<option value="furd">fürdet</option>
+<option value="furdi">fürdik</option>
+<option value="fure">fűrészel</option>
+<option value="fus">füstöl</option>
+<option value="fusz">fűszerez</option>
+<option value="futa">fűt</option>
+<option value="futy">fütyül</option>
+<option value="g">gazdálkodik</option>
+<option value="ge">gépel</option>
+<option value="gep">gépesít</option>
+<option value="gi">gitározik</option>
+<option value="go">gombol</option>
+<option value="gon">gondol</option>
+<option value="gond">gondolkodik</option>
+<option value="gondo">gondolkozik</option>
+<option value="gondos">gondoskodik</option>
+<option value="gondoz">gondoz</option>
+<option value="gr">gratulál</option>
+<option value="gu">gurul</option>
+<option value="gy">gyakorol</option>
+<option value="gya">gyalogol</option>
+<option value="gyan">gyanakszik</option>
+<option value="gyani">gyanít</option>
+<option value="gyanu">gyanúsít</option>
+<option value="gyar">gyárt</option>
+<option value="gyas">gyászol</option>
+<option value="gye">gyengít</option>
+<option value="gyen">gyengül</option>
+<option value="gyi">gyilkol</option>
+<option value="gyo">gyógyít</option>
+<option value="gyog">gyógyul</option>
+<option value="gyor">gyorsít</option>
+<option value="gyors">gyorsul</option>
+<option value="gyon">gyönyörködik</option>
+<option value="gyoz">győz</option>
+<option value="gyu">gyújt</option>
+<option value="gyul">gyullad</option>
+<option value="gyur">gyúr</option>
+<option value="gyuj">gyűjt</option>
+<option value="gyuli">gyűlik</option>
+<option value="gyulo">gyűlöl</option>
+<option value="gyuur">gyűr</option>
+<option value="h">habozik</option>
+<option value="ha">hagy</option>
+<option value="haj">hajlít</option>
+<option value="hajn">hajnalodik</option>
+<option value="hajt">hajt</option>
+<option value="hal">hal</option>
+<option value="hala">halad</option>
+<option value="halas">halászik</option>
+<option value="halasz">halaszt</option>
+<option value="hald">haldoklik</option>
+<option value="hall">hall</option>
+<option value="halla">hallatszik</option>
+<option value="hallg">hallgat</option>
+<option value="ham">hamisít</option>
+<option value="hamo">hámoz</option>
+<option value="hang">hangsúlyoz</option>
+<option value="hany">hány</option>
+<option value="har">haragszik</option>
+<option value="hara">harangoz</option>
+<option value="harap">harap</option>
+<option value="harc">harcol</option>
+<option value="has">hasonlít</option>
+<option value="hasz">használ</option>
+<option value="hat">hat</option>
+<option value="hata">határoz</option>
+<option value="hav">havazik</option>
+<option value="haz">házasodik</option>
+<option value="hazu">hazudik</option>
+<option value="he">hegedül</option>
+<option value="helyes">helyesel</option>
+<option value="hel">helyettesít</option>
+<option value="hely">helyez</option>
+<option value="helye">helyezkedik</option>
+<option value="helyt">helytelenít</option>
+<option value="hi">hiányzik</option>
+<option value="hib">hibázik</option>
+<option value="hin">hintázik</option>
+<option value="his">hisz</option>
+<option value="hit">hitelez</option>
+<option value="hiv">hív</option>
+<option value="hiz">hízeleg</option>
+<option value="hizi">hízik</option>
+<option value="hizl">hizlal</option>
+<option value="ho">hódít</option>
+<option value="hor">hord</option>
+<option value="horg">horgászik</option>
+<option value="hork">horkol</option>
+<option value="hos">hosszabbít</option>
+<option value="hoz">hoz</option>
+<option value="hu">hull</option>
+<option value="huz">húz</option>
+<option value="hul">hűl</option>
+<option value="hus">hűsít</option>
+<option value="hut">hűt</option>
+<option value="i">idegesít</option>
+<option value="id">idegeskedik</option>
+<option value="ide">idéz</option>
+<option value="ig">igazít</option>
+<option value="iga">igazol</option>
+<option value="igaz">igazoltat</option>
+<option value="ige">igényel</option>
+<option value="iger">ígér</option>
+<option value="igy">igyekszik</option>
+<option value="ij">ijeszt</option>
+<option value="il">illeszkedik</option>
+<option value="ill">illeszt</option>
+<option value="ille">illet</option>
+<option value="elli">illik</option>
+<option value="im">imád</option>
+<option value="ima">imádkozik</option>
+<option value="imp">importál</option>
+<option value="in">indít</option>
+<option value="ind">indokol</option>
+<option value="indu">indul</option>
+<option value="int">int</option>
+<option value="inte">integet</option>
+<option value="intez">intéz</option>
+<option value="intezk">intézkedik</option>
+<option value="ip">iparosít</option>
+<option value="ir">ír</option>
+<option value="ira">irányít</option>
+<option value="iri">irigyel</option>
+<option value="is">ismer</option>
+<option value="ism">ismerkedik</option>
+<option value="isme">ismertet</option>
+<option value="ismet">ismétel</option>
+<option value="ismetl">ismétlődik</option>
+<option value="isz">iszik</option>
+<option value="it">itat</option>
+<option value="it">ítél</option>
+<option value="iz">izgul</option>
+<option value="izl">ízlik</option>
+<option value="izz">izzad</option>
+<option value="izzi">izzik</option>
+<option value="j">jár</option>
+<option value="ja">játszik</option>
+<option value="jav">javasol</option>
+<option value="javi">javít</option>
+<option value="javu">javul</option>
+<option value="je">jegyez</option>
+<option value="jeg">jegyzetel</option>
+<option value="jel">jelent</option>
+<option value="jele">jelentkezik</option>
+<option value="jelez">jelez</option>
+<option value="jell">jellemez</option>
+<option value="jelo">jelöl</option>
+<option value="jo">jósol</option>
+<option value="jon">jön</option>
+<option value="ju">jut</option>
+<option value="jut">jutalmaz</option>
+<option value="jutt">juttat</option>
+<option value="k">kacsint</option>
+<option value="ka">kanyarodik</option>
+<option value="kap">kap</option>
+<option value="kapa">kapar</option>
+<option value="kapas">kapaszkodik</option>
+<option value="kapc">kapcsol</option>
+<option value="kapcs">kapcsolódik</option>
+<option value="kar">karambolozik</option>
+<option value="karm">karmol</option>
+<option value="karo">káromkodik</option>
+<option value="kart">kártyázik</option>
+<option value="kas">kaszál</option>
+<option value="kav">kávézik</option>
+<option value="ke">kedvel</option>
+<option value="kef">kefél</option>
+<option value="kel">kel</option>
+<option value="kele">keletkezik</option>
+<option value="kell">kell</option>
+<option value="kelt">kelt</option>
+<option value="kelte">keltez</option>
+<option value="ken">ken</option>
+<option value="keny">kényeztet</option>
+<option value="kenys">kényszerít</option>
+<option value="kep">képez</option>
+<option value="kepz">képzel</option>
+<option value="ker">kér</option>
+<option value="kerd">kérdez</option>
+<option value="kere">kerékpározik</option>
+<option value="kerel">kérelmez</option>
+<option value="keres">keres</option>
+<option value="keresk">kereskedik</option>
+<option value="keresz">keresztel</option>
+<option value="kerg">kerget</option>
+<option value="keri">kering</option>
+<option value="kert">kertészkedik</option>
+<option value="keru">kerül</option>
+<option value="kerv">kérvényez</option>
+<option value="kes">késik</option>
+<option value="kesz">készít</option>
+<option value="keszu">készül</option>
+<option value="keszul">készülődik</option>
+<option value="ket">kétszerez</option>
+<option value="kett">kettőz</option>
+<option value="kev">kever</option>
+<option value="kez">kezd</option>
+<option value="kezd">kezdődik</option>
+<option value="keze">kezel</option>
+<option value="kezi">kézilabdázik</option>
+<option value="kezim">kézimunkázik</option>
+<option value="ki">kiabál</option>
+<option value="kia">kiált</option>
+<option value="kil">kilyukad</option>
+<option value="kin">kínál</option>
+<option value="kino">kínoz</option>
+<option value="kir">kirándul</option>
+<option value="kis">kísér</option>
+<option value="kiv">kíván</option>
+<option value="ko">koccan</option>
+<option value="koc">koccint</option>
+<option value="kol">koldul</option>
+<option value="kop">kopik</option>
+<option value="kopo">kopog</option>
+<option value="kopog">kopogtat</option>
+<option value="kor">korcsolyázik</option>
+<option value="korm">kormányoz</option>
+<option value="kors">korszerűsít</option>
+<option value="kos">kosárlabdázik</option>
+<option value="kost">kóstol</option>
+<option value="koh">köhög</option>
+<option value="kolc">kölcsönöz</option>
+<option value="kolt">költ</option>
+<option value="kolto">költözik</option>
+<option value="koltoz">költözködik</option>
+<option value="kon">könyörög</option>
+<option value="koop">köp</option>
+<option value="kosz">köszön</option>
+<option value="kot">köt</option>
+<option value="kov">követ</option>
+<option value="kove">követel</option>
+<option value="kovet">következik</option>
+<option value="kovetk">következtet</option>
+<option value="koz">közeledik</option>
+<option value="kozl">közlekedik</option>
+<option value="kozo">közöl</option>
+<option value="kozv">közvetít</option>
+<option value="kr">kritizál</option>
+<option value="ku">kukorékol</option>
+<option value="kut">kutat</option>
+<option value="kul">küld</option>
+<option value="kulo">különbözik</option>
+<option value="kuz">küzd</option>
+<option value="l">lábadozik</option>
+<option value="la">labdázik</option>
+<option value="lak">lakik</option>
+<option value="lap">lapoz</option>
+<option value="las">lassít</option>
+<option value="lat">lát</option>
+<option value="lato">látogat</option>
+<option value="lats">látszik</option>
+<option value="le">legel</option>
+<option value="leh">lehet</option>
+<option value="lej">lejt</option>
+<option value="lek">lektorál</option>
+<option value="lel">lélegzik</option>
+<option value="lelk">lelkesedik</option>
+<option value="lelke">lelkesít</option>
+<option value="lelt">leltároz</option>
+<option value="lep">lép</option>
+<option value="les">lesz</option>
+<option value="let">létesít</option>
+<option value="lete">létezik</option>
+<option value="lev">levelez</option>
+<option value="li">liheg</option>
+<option value="lo">locsol</option>
+<option value="log">lóg</option>
+<option value="lop">lop</option>
+<option value="lot">lottózik</option>
+<option value="lov">lovagol</option>
+<option value="loo">lő</option>
+<option value="lok">lök</option>
+<option value="ly">lyukaszt</option>
+<option value="m">magáz</option>
+<option value="ma">magázódik</option>
+<option value="mag">magyaráz</option>
+<option value="mak">makacskodik</option>
+<option value="man">manikűröz</option>
+<option value="mar">marad</option>
+<option value="mas">másol</option>
+<option value="masz">mászik</option>
+<option value="massz">masszíroz</option>
+<option value="megb">megbetegszik</option>
+<option value="me">megijed</option>
+<option value="meg">meglep</option>
+<option value="meg">megrémül</option>
+<option value="megs">megsebez</option>
+<option value="megse">megsértődik</option>
+<option value="megser">megsérül</option>
+<option value="megy">megy</option>
+<option value="mel">melegít</option>
+<option value="mele">melegszik</option>
+<option value="mell">mellékel</option>
+<option value="men">menstruál</option>
+<option value="ment">ment</option>
+<option value="mer">mer</option>
+<option value="meer">mér</option>
+<option value="merg">mérgesít</option>
+<option value="merge">mérgez</option>
+<option value="mes">mesél</option>
+<option value="mesz">meszel</option>
+<option value="mo">mond</option>
+<option value="mor">morog</option>
+<option value="mos">mos</option>
+<option value="mosa">mosakodik</option>
+<option value="mosak">mosakszik</option>
+<option value="mosd">mosdat</option>
+<option value="mosdi">mosdik</option>
+<option value="moso">mosogat</option>
+<option value="mosol">mosolyog</option>
+<option value="moz">mozdít</option>
+<option value="mozd">mozdul</option>
+<option value="mozg">mozgat</option>
+<option value="mozo">mozog</option>
+<option value="mu">mulat</option>
+<option value="mul">múlik</option>
+<option value="muta">mutat</option>
+<option value="mutat">mutatkozik</option>
+<option value="muz">muzsikál</option>
+<option value="muk">működik</option>
+<option value="mut">műt</option>
+<option value="muv">művel</option>
+<option value="n">nagyít</option>
+<option value="na">napozik</option>
+<option value="ne">nevel</option>
+<option value="nev">nevet</option>
+<option value="neve">nevez</option>
+<option value="nez">néz</option>
+<option value="no">nő</option>
+<option value="nos">nősül</option>
+<option value="nov">növekszik</option>
+<option value="nove">növel</option>
+<option value="ny">nyal</option>
+<option value="nya">nyaral</option>
+<option value="nyav">nyávog</option>
+<option value="nye">nyel</option>
+<option value="nyer">nyer</option>
+<option value="nyi">nyílik</option>
+<option value="nyil">nyilvánít</option>
+<option value="nyit">nyit</option>
+<option value="nyo">nyom</option>
+<option value="nyom">nyomoz</option>
+<option value="nyomt">nyomtat</option>
+<option value="nyu">nyugdíjaz</option>
+<option value="nyug">nyugszik</option>
+<option value="nyugt">nyugtalankodik</option>
+<option value="nyugtal">nyugtalanít</option>
+<option value="nyugta">nyugtat</option>
+<option value="nyuj">nyújt</option>
+<option value="nyujt">nyújtózkodik</option>
+<option value="nyul">nyúl</option>
+<option value="o">óhajt</option>
+<option value="ok">okoz</option>
+<option value="old">old</option>
+<option value="oldo">oldódik</option>
+<option value="olv">olvad</option>
+<option value="olva">olvas</option>
+<option value="olvas">olvaszt</option>
+<option value="op">operál</option>
+<option value="or">ordít</option>
+<option value="os">oszt</option>
+<option value="ol">öl</option>
+<option value="ole">ölel</option>
+<option value="olt">öltözik</option>
+<option value="olto">öltözködik</option>
+<option value="oltoz">öltöztet</option>
+<option value="om">ömlik</option>
+<option value="on">önt</option>
+<option value="ont">öntöz</option>
+<option value="ore">öregszik</option>
+<option value="ori">őriz</option>
+<option value="oro">örököl</option>
+<option value="orol">őröl</option>
+<option value="oru">örül</option>
+<option value="orv">örvend</option>
+<option value="osz">őszül</option>
+<option value="ot">öttusázik</option>
+<option value="p">panaszkodik</option>
+<option value="pa">parancsol</option>
+<option value="par">parkol</option>
+<option value="paro">párolog</option>
+<option value="paz">pazarol</option>
+<option value="pi">pihen</option>
+<option value="pin">pingpongozik</option>
+<option value="pir">pirul</option>
+<option value="pis">piszkít</option>
+<option value="po">pofoz</option>
+<option value="pol">politizál</option>
+<option value="por">porol</option>
+<option value="pot">pótol</option>
+<option value="pr">próbál</option>
+<option value="pu">pusztít</option>
+<option value="pu">pusztul</option>
+<option value="r">rabol</option>
+<option value="ra">rág</option>
+<option value="rag">ragad</option>
+<option value="raga">ragad</option>
+<option value="rago">ragoz</option>
+<option value="ragy">ragyog</option>
+<option value="raj">rajzol</option>
+<option value="rak">rak</option>
+<option value="raz">ráz</option>
+<option value="re">reggelizik</option>
+<option value="rem">remél</option>
+<option value="ren">rendel</option>
+<option value="rende">rendelkezik</option>
+<option value="rend">rendez</option>
+<option value="rep">repül</option>
+<option value="res">reszket</option>
+<option value="resz">részletez</option>
+<option value="rob">robbant</option>
+<option value="ro">rohan</option>
+<option value="rom">romlik</option>
+<option value="ron">ront</option>
+<option value="rop">röplabdázik</option>
+<option value="ru">rúg</option>
+<option value="s">sajnál</option>
+<option value="sa">sakkozik</option>
+<option value="sap">sápad</option>
+<option value="se">segít</option>
+<option value="sej">sejt</option>
+<option value="ser">sért</option>
+<option value="set">sétál</option>
+<option value="si">síel</option>
+<option value="sie">siet</option>
+<option value="sik">sikerül</option>
+<option value="sim">simogat</option>
+<option value="sir">sír</option>
+<option value="so">sóhajt</option>
+<option value="soz">sóz</option>
+<option value="sop">söpör</option>
+<option value="sot">sötétedik</option>
+<option value="sp">sportol</option>
+<option value="su">súg</option>
+<option value="sutt">suttog</option>
+<option value="sul">süllyed</option>
+<option value="sut">süt</option>
+<option value="sz">szabad</option>
+<option value="sza">szabályoz</option>
+<option value="szag">szagol</option>
+<option value="szak">szakad</option>
+<option value="szaki">szakít</option>
+<option value="szal">szalad</option>
+<option value="szala">szaladgál</option>
+<option value="szall">száll</option>
+<option value="szalli">szállít</option>
+<option value="szam">számít</option>
+<option value="szaml">számláz</option>
+<option value="szamo">számol</option>
+<option value="szan">szánt</option>
+<option value="szar">szárad</option>
+<option value="szari">szárít</option>
+<option value="szar">származik</option>
+<option value="szav">szavaz</option>
+<option value="sze">szed</option>
+<option value="szed">szédül</option>
+<option value="szeg">szegényedik</option>
+<option value="szegy">szégyell</option>
+<option value="szen">szenved</option>
+<option value="szenn">szennyez</option>
+<option value="szer">szerel</option>
+<option value="szere">szerepel</option>
+<option value="szeret">szeret</option>
+<option value="szerez">szerez</option>
+<option value="szerv">szervez</option>
+<option value="szi">szid</option>
+<option value="szig">szigetel</option>
+<option value="sziv">szív</option>
+<option value="szok">szokik</option>
+<option value="szol">szól</option>
+<option value="szolg">szolgál</option>
+<option value="szoli">szólít</option>
+<option value="szor">szórakozik</option>
+<option value="szora">szoroz</option>
+<option value="szo">sző</option>
+<option value="szt">sztrájkol</option>
+<option value="szu">szül</option>
+<option value="szul">születik</option>
+<option value="szun">szűnik</option>
+<option value="szur">szűr</option>
+<option value="t">tagad</option>
+<option value="ta">takar</option>
+<option value="tak">takarékoskodik</option>
+<option value="taka">takarít</option>
+<option value="tal">talál</option>
+<option value="tala">találkozik</option>
+<option value="tam">támad</option>
+<option value="tan">tanácsol</option>
+<option value="tanc">táncol</option>
+<option value="tani">tanít</option>
+<option value="tank">tankol</option>
+<option value="tanu">tanul</option>
+<option value="tanul">tanulmányoz</option>
+<option value="tap">tapasztal</option>
+<option value="tape">tapétáz</option>
+<option value="tapl">táplál</option>
+<option value="tapla">táplálkozik</option>
+<option value="taps">tapsol</option>
+<option value="tar">tárcsáz</option>
+<option value="targ">tárgyal</option>
+<option value="tart">tart</option>
+<option value="tarta">tartalmaz</option>
+<option value="tarto">tartozik</option>
+<option value="tartoz">tartózkodik</option>
+<option value="tartozt">tartóztat</option>
+<option value="tav">táviratozik</option>
+<option value="tavo">távolodik</option>
+<option value="te">tegez</option>
+<option value="teg">tegeződik</option>
+<option value="tel">telefonál</option>
+<option value="teli">telik</option>
+<option value="tem">temet</option>
+<option value="ten">teniszezik</option>
+<option value="teny">tenyészt</option>
+<option value="ter">tér</option>
+<option value="tere">terem</option>
+<option value="terem">teremt</option>
+<option value="teri">terít</option>
+<option value="terit">térít</option>
+<option value="terj">terjed</option>
+<option value="terje">terjeszt</option>
+<option value="term">termel</option>
+<option value="terme">termeszt</option>
+<option value="terv">tervez</option>
+<option value="tesz">tesz</option>
+<option value="tet">tetszik</option>
+<option value="tev">téved</option>
+<option value="teve">téved</option>
+<option value="ti">tilt</option>
+<option value="tis">tisztáz</option>
+<option value="tisz">tisztel</option>
+<option value="tiszt">tisztít</option>
+<option value="tisztu">tisztul</option>
+<option value="tiz">tízóraizik</option>
+<option value="to">tojik</option>
+<option value="tol">tol</option>
+<option value="tolm">tolmácsol</option>
+<option value="torn">tornázik</option>
+<option value="tok">tökéletesít</option>
+<option value="tolt">tölt</option>
+<option value="tom">töm</option>
+<option value="tor">tör</option>
+<option value="tori">törik</option>
+<option value="toro">törődik</option>
+<option value="torol">töröl</option>
+<option value="tort">történik</option>
+<option value="torul">törülközik</option>
+<option value="tr">tréfál</option>
+<option value="tu">tud</option>
+<option value="tul">túloz</option>
+<option value="tun">tűnik</option>
+<option value="tur">türelmetlenkedik</option>
+<option value="u">udvarol</option>
+<option value="ug">ugat</option>
+<option value="ugr">ugrik</option>
+<option value="un">un</option>
+<option value="una">unatkozik</option>
+<option value="us">úszik</option>
+<option value="utal">utal</option>
+<option value="uta">utál</option>
+<option value="utan">utánoz</option>
+<option value="utaz">utazik</option>
+<option value="uz">uzsonnázik</option>
+<option value="ud">üdít</option>
+<option value="udu">üdül</option>
+<option value="udv">üdvözöl</option>
+<option value="ul">ül</option>
+<option value="uld">üldöz</option>
+<option value="ult">ültet</option>
+<option value="ut">üt</option>
+<option value="utk">ütközik</option>
+<option value="uze">üzen</option>
+<option value="v">vacsorázik</option>
+<option value="va">vadászik</option>
+<option value="vad">vádol</option>
+<option value="vag">vág</option>
+<option value="vagy">vágyik</option>
+<option value="val">válaszol</option>
+<option value="vala">választ</option>
+<option value="vali">válik</option>
+<option value="valt">vált</option>
+<option value="valto">változik</option>
+<option value="valtoz">változtat</option>
+<option value="vam">vámol</option>
+<option value="van">van</option>
+<option value="var">vár</option>
+<option value="varr">varr</option>
+<option value="vas">vasal</option>
+<option value="vasa">vásárol</option>
+<option value="ved">véd</option>
+<option value="vede">védekezik</option>
+<option value="veg">végez</option>
+<option value="ver">verekszik</option>
+<option value="vers">versenyez</option>
+<option value="verz">vérzik</option>
+<option value="ves">vesz</option>
+<option value="vesz">vész</option>
+<option value="vesze">veszekszik</option>
+<option value="veszi">veszik</option>
+<option value="veszit">veszít</option>
+<option value="veszt">veszt</option>
+<option value="vet">vet</option>
+<option value="veti">vetít</option>
+<option value="vetk">vetkőzik</option>
+<option value="vez">vezet</option>
+<option value="vi">viccel</option>
+<option value="vig">vigyáz</option>
+<option value="vil">világít</option>
+<option value="vill">villámlik</option>
+<option value="vir">virágzik</option>
+<option value="vise">visel</option>
+<option value="vis">viselkedik</option>
+<option value="visz">visz</option>
+<option value="vit">vitatkozik</option>
+<option value="viv">vív</option>
+<option value="viz">vizel</option>
+<option value="vizi">vízilabdázik</option>
+<option value="vizs">vizsgál</option>
+<option value="vizsg">vizsgázik</option>
+<option value="vo">vonz</option>
+<option value="z">zár</option>
+<option value="za">zavar</option>
+<option value="ze">zenél</option>
+<option value="zo">zongorázik</option>
+<option value="zu">zúg</option>
+<option value="zuh">zuhan</option>
+<option value="zuha">zuhanyozik</option>
+<option value="zuho">zuhog</option>
+        </select>
+        </font></td>
+      <td width="8%">&nbsp;</td>
+      <td width="3%" class="tbfocim">én</td>
+      <td width="21%"> 
+        <input type="text" name="ige1" size="25">
+      </td>
+      <td width="7%"> <font size="2"> 
+        <input type="button" name="gomb1" value="JÓ?" onClick="kiskontrol(1)">
+        </font> </td>
+      <td width="7%">&nbsp; </td>
+      <td width="3%" class="tbfocim">én</td>
+      <td width="25%"> 
+        <input type="text" name="ige8" size="25">
+      </td>
+      <td width="11%"><font size="2"> 
+        <input type="button" name="gomb8" value="JÓ?" onClick="kiskontrol(8)">
+        </font></td>
+      <td width="11%"> <font size="2"> </font> </td>
+    </tr>
+    <tr> 
+      <td width="8%" height="18" >&nbsp;</td>
+      <td width="3%" class="tbfocim" height="18">te</td>
+      <td width="21%" height="18" > 
+        <input type="text" name="ige2" size="25">
+      </td>
+      <td width="7%" height="18" > <font size="2"> 
+        <input type="button" name="gomb2" value="JÓ?" onClick="kiskontrol(2)">
+        </font> </td>
+      <td width="7%" height="18" >&nbsp; </td>
+      <td width="3%" class="tbfocim" height="18">te</td>
+      <td width="25%" height="18" > 
+        <input type="text" name="ige9" size="25">
+      </td>
+      <td width="11%" height="18" ><font size="2"> 
+        <input type="button" name="gomb9" value="JÓ?" onClick="kiskontrol(9)">
+        </font></td>
+      <td width="11%" height="18" > <font size="2"> 
+        <input type="button" name="ok" value="MIND JÓ?" onClick="kontrol()">
+        </font> </td>
+    </tr>
+    <tr> 
+      <td width="8%">&nbsp;</td>
+      <td width="3%" class="tbfocim">ő</td>
+      <td width="21%"> 
+        <input type="text" name="ige3" size="25">
+      </td>
+      <td width="7%"> <font size="2"> 
+        <input type="button" name="gomb3" value="JÓ?" onClick="kiskontrol(3)">
+        </font> </td>
+      <td width="7%">&nbsp; </td>
+      <td width="3%" class="tbfocim">ő</td>
+      <td width="25%"> 
+        <input type="text" name="ige10" size="25">
+      </td>
+      <td width="11%"><font size="2"> 
+        <input type="button" name="gomb10" value="JÓ?" onClick="kiskontrol(10)">
+        </font></td>
+      <td width="11%"> <font size="2"> </font> </td>
+    </tr>
+    <tr> 
+      <td width="8%">&nbsp;</td>
+      <td width="3%" class="tbfocim">mi</td>
+      <td width="21%"> 
+        <input type="text" name="ige4" size="25">
+      </td>
+      <td width="7%"> <font size="2"> 
+        <input type="button" name="gomb4" value="JÓ?" onClick="kiskontrol(4)">
+        </font> </td>
+      <td width="7%">&nbsp; </td>
+      <td width="3%" class="tbfocim">mi</td>
+      <td width="25%"> 
+        <input type="text" name="ige11" size="25">
+      </td>
+      <td width="11%"><font size="2"> 
+        <input type="button" name="gomb11" value="JÓ?" onClick="kiskontrol(11)">
+        </font></td>
+      <td width="11%"> <font size="2"> </font> </td>
+    </tr>
+    <tr> 
+      <td width="8%">&nbsp;</td>
+      <td width="3%" class="tbfocim">ti</td>
+      <td width="21%"> 
+        <input type="text" name="ige5" size="25">
+      </td>
+      <td width="7%"> <font size="2"> 
+        <input type="button" name="gomb5" value="JÓ?" onClick="kiskontrol(5)">
+        </font> </td>
+      <td width="7%">&nbsp; </td>
+      <td width="3%" class="tbfocim">ti</td>
+      <td width="25%"> 
+        <input type="text" name="ige12" size="25">
+      </td>
+      <td width="11%"><font size="2"> 
+        <input type="button" name="gomb12" value="JÓ?" onClick="kiskontrol(12)">
+        </font></td>
+      <td width="11%"> <font size="2"> 
+        <input type="button" name="fogomb" value="  R A G O Z  " onClick="beiras()">
+        </font> </td>
+    </tr>
+    <tr> 
+      <td width="8%">&nbsp;</td>
+      <td width="3%" class="tbfocim">ők</td>
+      <td width="21%"> 
+        <input type="text" name="ige6" size="25">
+      </td>
+      <td width="7%"> <font size="2"> 
+        <input type="button" name="gomb6" value="JÓ?" onClick="kiskontrol(6)">
+        </font> </td>
+      <td width="7%">&nbsp; </td>
+      <td width="3%" class="tbfocim">ők</td>
+      <td width="25%"> 
+        <input type="text" name="ige13" size="25">
+      </td>
+      <td width="11%"><font size="2"> 
+        <input type="button" name="gomb13" value="JÓ?" onClick="kiskontrol(13)">
+        </font></td>
+      <td width="11%"> <font size="2"> </font> </td>
+    </tr>
+    <tr> 
+      <td width="8%" height="23">&nbsp;</td>
+      <td width="3%" height="23">&nbsp;</td>
+      <td colspan="4" height="23"> 
+        <div class="tbfocimright">én -----&gt; téged / titeket</div>
+      </td>
+      <td width="25%" height="23"> 
+        <input type="text" name="ige7" size="25">
+      </td>
+      <td width="11%" height="23"><font size="2"> 
+        <input type="button" name="gomb7" value="JÓ?" onClick="kiskontrol(7)">
+        </font></td>
+      <td width="11%" height="23"> <font size="2"> </font> </td>
+    </tr>
+  </table>
+  <br>
+  <font size="2"> </font> 
+</form>
+</body>
+</html>
